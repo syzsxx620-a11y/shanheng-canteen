@@ -1,0 +1,14 @@
+# 相对本配置文件的数据集目录；替换成你的标注数据。
+path: ./canteen
+train: images/train
+val: images/val
+names:
+  0: rice
+  1: noodles
+  2: chicken
+  3: beef
+  4: egg
+  5: tofu
+  6: vegetables
+  7: potato
+  8: fruit

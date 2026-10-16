@@ -1,0 +1,11 @@
+$ErrorActionPreference = 'Stop'
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$runtimeRoot = Join-Path $env:USERPROFILE '.cache\codex-runtimes\codex-primary-runtime\dependencies'
+$pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+$pythonRuntime = if ($pythonCommand) { $pythonCommand.Source } else { Join-Path $runtimeRoot 'python\python.exe' }
+$nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+$nodeRuntime = if ($nodeCommand) { $nodeCommand.Source } else { Join-Path $runtimeRoot 'node\bin\node.exe' }
+$pnpmCommand = Get-Command pnpm.cmd -ErrorAction SilentlyContinue
+$pnpmRuntime = if ($pnpmCommand) { $pnpmCommand.Source } else { Join-Path $runtimeRoot 'bin\fallback\pnpm.cmd' }
+$venvPython = Join-Path $projectRoot '.venv\Scripts\python.exe'
+if (Test-Path -LiteralPath $nodeRuntime) { $env:PATH = (Split-Path -Parent $nodeRuntime) + ';' + $env:PATH }

@@ -1,0 +1,6 @@
+<script setup lang="ts">
+import {Heart,MapPin,Flame} from 'lucide-vue-next'
+import type {Dish} from '../api'
+defineProps<{dish:Dish;favorite?:boolean}>();defineEmits(['favorite','record'])
+</script>
+<template><article class="dish-card"><div class="dish-cover"><img :src="dish.image_url||'/assets/vegetables.svg'" :alt="dish.name"><span class="dish-type">{{dish.category}}</span><button class="favorite-btn" :class="{selected:favorite}" @click="$emit('favorite',dish.id)" :aria-label="favorite?'取消收藏':'收藏菜品'"><Heart :size="18" :fill="favorite?'currentColor':'none'" /></button></div><div class="dish-info"><div class="row"><h3>{{dish.name}}</h3><strong class="price">¥{{dish.price.toFixed(1)}}</strong></div><div class="muted small location"><MapPin :size="13"/>{{dish.canteen_name}} · {{dish.window_name}}</div><div class="dish-macros"><span><Flame :size="14"/>{{dish.kcal}} kcal</span><span>蛋白质 {{dish.protein}}g</span><span>{{dish.portion_g}}g / 份</span></div><div class="row"><span class="small muted">{{dish.is_demo?'演示配方':'配方估算'}} · {{dish.allergens===null?'过敏原待补充':dish.allergens.length?dish.allergens.join('、'):'无已知标注过敏原'}}</span><el-button text type="primary" @click="$emit('record',dish)">记录用餐 +</el-button></div></div></article></template>

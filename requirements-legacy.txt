@@ -1,0 +1,6 @@
+# 仅用于保留的旧Streamlit原型
+streamlit>=1.40,<2
+pandas>=2.2,<3
+Pillow>=10.4,<13
+ultralytics>=8.3,<9
+tzdata>=2024.1
